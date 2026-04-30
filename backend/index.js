@@ -15,5 +15,8 @@ app.get('/sample-graph', (req,res)=>{
   res.sendFile(path.join(__dirname, '../data/sampleGraph.json'))
 })
 
-const PORT = process.env.PORT || 4000
-app.listen(PORT, ()=> console.log(`Backend running on http://localhost:${PORT}`))
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
+});
