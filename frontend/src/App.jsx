@@ -25,7 +25,7 @@ export default function App(){
     return pos
   }
 
-  useEffect(()=>{ axios.get('http://localhost:4000/sample-graph').then(r=>setGraph(r.data)) },[])
+  useEffect(()=>{ axios.get('https://smart-route-planner-2rsv.onrender.com/sample-graph').then(r=>setGraph(r.data)) },[])
 
   // ensure positions and default source/target when graph changes
   useEffect(()=>{
@@ -50,7 +50,7 @@ export default function App(){
     setRunning(true)
     setResult(null)
     try{
-      const res = await axios.post('http://localhost:4000/route', { graph, source, target, algorithm: algo, positions })
+      const res = await axios.post('https://smart-route-planner-2rsv.onrender.com/route', { graph, source, target, algorithm: algo, positions })
       setResult(res.data)
     }catch(e){ alert(e.response?.data?.error || e.message) }
     setRunning(false)
@@ -58,7 +58,7 @@ export default function App(){
 
   function runAll(){
     // Run all three algorithms and show comparison
-    Promise.all(['dijkstra','astar','greedy'].map(a=> axios.post('http://localhost:4000/route', {graph, source, target, algorithm: a, positions}).then(r=>({algorithm:a, ...r.data})).catch(e=>({algorithm:a,error:e.message}))))
+    Promise.all(['dijkstra','astar','greedy'].map(a=> axios.post('https://smart-route-planner-2rsv.onrender.com/route', {graph, source, target, algorithm: a, positions}).then(r=>({algorithm:a, ...r.data})).catch(e=>({algorithm:a,error:e.message}))))
     .then(setResult)
   }
 
